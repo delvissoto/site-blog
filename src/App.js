@@ -1,23 +1,57 @@
-import logo from './logo.svg';
+import {createBrowserRouter,RouterProvider,Route, Outlet} from "react-router-dom" //React-router-dom allows me to make routes to other pages. 
 import './App.css';
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Write from "./pages/Write";
+import Home from "./pages/Home";
+import Single from "./pages/Single";
+import Navbar  from "./components/Navbar";
+import Footer from "./components/Footer";
+
+
+// this Layout functions is a outlet that allow to simplify the routes allowing me to render the child route while having the navbar and footer available. 
+const Layout = () => {
+  return(
+    <>
+    <Navbar/>
+    <Outlet/>
+    <Footer/>
+    </>
+  )
+}
+const router = createBrowserRouter([
+  {
+      path:"/",
+      element: <Layout/>,
+      children:[
+        {
+          path:"/",
+          element:<Home/>
+        },
+        {
+          path:"/write",
+          element:<Write/>
+        },
+        {
+          path:"/post/:id",
+          element:<Single/>
+        },
+      ]
+  },
+  {path: "/register",
+element:<Register/>,
+},
+{path: "/login",
+element:<Login/>,
+},
+]);
+
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+         <RouterProvider router={router}/>  {/*This Allows for renderind the different pages from one area.*/}
     </div>
   );
 }
