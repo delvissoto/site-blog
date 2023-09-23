@@ -1,4 +1,4 @@
-import {createBrowserRouter,RouterProvider,Route, Outlet} from "react-router-dom" //React-router-dom allows me to make routes to other pages. 
+import {createBrowserRouter,RouterProvider, Outlet} from "react-router-dom" //React-router-dom allows me to make routes to other pages. 
 import './App.css';
 import Register from "./pages/Register";
 import Login from "./pages/Login";

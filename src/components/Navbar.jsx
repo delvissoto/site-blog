@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from '../img/logo.png'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../context/authContext'
+import axios from 'axios'
+
+
+
 const Navbar = () => {
+    axios.defaults.withCredentials = true;
+
+    const { currentUser, logout } = useContext(AuthContext);
+   
+   
   return (
     <div className='navbar'>
         <div className='container'>
@@ -28,8 +38,8 @@ const Navbar = () => {
                 <Link className='link' to="/?car=art">
                     <h6>FOOD</h6>
                 </Link>
-                <span>Delvis</span>
-                <span>Logout</span>
+                <span>{currentUser?.username}</span>
+                {currentUser? <span onClick={logout}>Logout</span> : <Link className='link' to='/login'> Login</Link>}
                 <span className='write'>
                     <Link to='/write'>Write</Link>
                 </span>
